@@ -1,1 +1,32 @@
+Twitter Crawler is a Neo4j experiment. It is as simple as possible with no intention
+to model any serious application architecture or something.
+It recursively fetches Twitter friends (the users a user follows) up to to a limited depth and width
+and enriches this data with geo location from Yahoo Places.
 
+I did not bother making it configurable without code modification, since it is not a library
+or a real application.
+
+Configure
+---------
+
+- Put the path to your Java JDK into the POM. 1.7 required.
+- Open Config.java and modify the configuration to your needs. Your Twitter ID can be
+  fetched via the Twitter API developer console or with this call:
+  http://api.twitter.com/1/users/lookup.xml?screen_name=<your twitter name here>
+
+Run
+---
+
+- Run the test CrawlerTest.testFriendCrawl
+  This will collect the Twitter friend graph into the Neo4J DB and cache all Twitter data in the files
+  which you have configured in Config.java.
+  Twitter limits the API calls to 150 per hour. The crawler stops when Twitter refuses the requests.
+  Restart it as often as you like. The Neo4j DB can always be regenerated on demand with the contents
+  of the cache files.
+- Run the test CrawlerTest.testDataFill
+  This will enrich the Twitter graph with user information and get geo data from Yahoo.
+
+Visualize
+---------
+
+- Download Gephi with the Neo4J Plugin. Enjoy the Geo Layouter!

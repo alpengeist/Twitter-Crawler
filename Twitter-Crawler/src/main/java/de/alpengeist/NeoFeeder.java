@@ -137,9 +137,9 @@ public class NeoFeeder {
             public void execute(GraphDatabaseService db) {
                 Node root = db.getReferenceNode();
                 if (! root.hasRelationship(TwitterRelationship.ALPENGEIST)) {
-                    Node alpengeist = createUser(391388175);
-                    Prop.DEPTH.set(alpengeist, 1L);
-                    root.createRelationshipTo(alpengeist, TwitterRelationship.ALPENGEIST);
+                    Node nodeNumberOne = createUser(Config.MY_TWITTER_ID);
+                    Prop.DEPTH.set(nodeNumberOne, 1L);
+                    root.createRelationshipTo(nodeNumberOne, TwitterRelationship.ALPENGEIST);
                 } else {
                     log.info("Alpengeist exists");
                 }
